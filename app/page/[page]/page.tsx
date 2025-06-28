@@ -6,7 +6,20 @@ import BlogArea1 from "@/components/sections/BlogArea1";
 
 
 export async function generateStaticParams() {
-  return [{ page: "1" }, { page: "2" }, { page: "3" }];
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts?page=1&limit=200`);
+
+  if (!res.ok) {
+    return [];
+  }
+
+  const json = await res.json();
+  const totalPages = json?.data?.pagination?.totalPages || 1;
+
+  const params = Array.from({ length: totalPages }, (_, i) => ({
+    page: (i + 1).toString(),
+  }));
+
+  return params;
 }
 
 export default async function BlogPage({
