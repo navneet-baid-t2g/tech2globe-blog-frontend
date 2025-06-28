@@ -1,52 +1,56 @@
-export default function Pagination({
-	prev,
-	currentPage,
-	getPaginationGroup,
-	next,
-	pages,
-	handleActive,
-}: any) {
-	return (
-		<>
-			<div className="theme-pagination text-center">
-				<ul>
-					{getPaginationGroup.length <= 0 ? null : (
-						<li onClick={prev} className="next_link page-item">
-							{currentPage === 1 ? null : (
-								<a>
-									<i className="fa-solid fa-angle-left" />
-								</a>
-							)}
-						</li>
-					)}
+"use client";
+import Link from "next/link";
+import React from "react";
 
-					{getPaginationGroup.map((item: any, index: any) => {
-						return (
-							<li
-								onClick={() => handleActive(item)}
-								key={index}
-
-							>
-								<a className={
-									currentPage === item
-										? "active"
-										: ""
-								}>{item}</a>
-							</li>
-						)
-					})}
-
-					{getPaginationGroup.length <= 0 ? null : (
-						<li onClick={next}>
-							{currentPage >= pages ? null : (
-								<a>
-									<i className="fa-solid fa-angle-right" />
-								</a>
-							)}
-						</li>
-					)}
-				</ul>
-			</div>
-		</>
-	)
+interface PaginationProps {
+  currentPage: number;
+  getPaginationGroup: number[];
+  totalPages: number;
 }
+
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  getPaginationGroup,
+  totalPages,
+}) => {
+
+  if (getPaginationGroup.length === 0) return null;
+
+  const basePath = "/page/";
+
+  return (
+    <div className="theme-pagination text-center">
+      <ul>
+        {/* Prev Button */}
+        {currentPage > 1 && (
+          <li className="page-item">
+            <Link href={`${basePath}${currentPage - 1}`}>
+              <i className="fa-solid fa-angle-left" />
+            </Link>
+          </li>
+        )}
+
+        {/* Page Numbers */}
+        {getPaginationGroup.map((item) => (
+          <li
+            key={item}
+            className={currentPage === item ? "page-item active" : "page-item"}
+          >
+            <Link href={`${basePath}${item}`}>{item}</Link>
+          </li>
+        ))}
+
+        {/* Next Button */}
+        {currentPage < totalPages && (
+          <li className="page-item">
+            <Link href={`${basePath}${currentPage + 1}`}>
+              <i className="fa-solid fa-angle-right" />
+            </Link>
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+};
+
+export default Pagination;

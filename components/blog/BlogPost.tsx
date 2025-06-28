@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import BlogCard1 from "./BlogCard1";
 import BlogCard2 from "./BlogCard2";
 import BlogCard3 from "./BlogCard3";
@@ -17,6 +17,9 @@ interface BlogItem {
 }
 
 interface BlogPostProps {
+  posts?: BlogItem[];
+  totalNumberOfPages?: number;
+  currentNumberPage?: number;
   style?: number;
   showPagination?: boolean;
   desc?: boolean;
@@ -30,98 +33,36 @@ interface BlogPostProps {
 }
 
 export default function BlogPost({
+  posts = [],
+  totalNumberOfPages = 1,
+  currentNumberPage = 1,
   style = 1,
   showPagination = true,
   desc = true,
   col = "col-lg-4",
-  showItem = 4,
-  video,
-  formatIcon,
-  latest,
-  showStart = 0,
-  showEnd = 5,
 }: BlogPostProps) {
-  const [data, setData] = useState<BlogItem[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [pagination, setPagination] = useState<number[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-	function cleanExcerpt(html: string): string {
-		return html
-			.replace(/<!--[\s\S]*?-->/g, "") // Remove comments
-			.replace(/<[^>]*>/g, "")         // Remove all HTML tags
-			.trim()
-	}
-	function truncate(text: string, maxLength: number): string {
-		return text.length > maxLength ? text.slice(0, maxLength) + "..." : text
-	}
+ const paginationItem = 4;
+const pagination = Array.from({ length: totalNumberOfPages }, (_, i) => i + 1);
 
-  // Fetch data from API on page or limit change
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(
-          `https://tech2globe.com/api/posts?page=${currentPage}&limit=${showItem}`
-        );
-        const json = await res.json();
+// sliding window logic
+let start = currentNumberPage <= 3 ? 0 : currentNumberPage - 2;
+let end = start + paginationItem;
 
-        const posts = json?.data?.posts || [];
-        const total = json?.data?.pagination?.totalPages || 1;
+if (end > totalNumberOfPages) {
+  end = totalNumberOfPages;
+  start = Math.max(end - paginationItem, 0);
+}
 
-        const mappedPosts: BlogItem[] = posts.map((post: any) => ({
-          id: post.ID,
-          title: post.post_title,
-          img: post.thumbnail_url,
-          category:
-            post.categories && post.categories.length > 0
-              ? post.categories[0].name === "Uncategorized" &&
-                post.categories.length > 1
-                ? post.categories[1].name
-                : post.categories[0].name
-              : "General",
+const getPaginationGroup = pagination.slice(start, end);
+console.log("current:", currentNumberPage, "start:", start, "end:", end);
 
-          author: post.author_name || "Admin",
-          date: post.post_date || new Date().toISOString(),
-		  excerpt: truncate(post.excerpt || cleanExcerpt(post.post_content),200)
-        }));
-
-        setData(mappedPosts);
-        setTotalPages(total);
-        createPagination(total);
-      } catch (error) {
-        console.error("Failed to fetch blog data:", error);
-        setData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
-  }, [currentPage, showItem]);
-
-  const createPagination = (pages: number) => {
-    let arr = Array.from({ length: pages }, (_, i) => i + 1);
-    setPagination(arr);
-  };
-
-  const paginationItem = 4;
-  let start = Math.floor((currentPage - 1) / paginationItem) * paginationItem;
-  let end = start + paginationItem;
-  const getPaginationGroup = pagination.slice(start, end);
-
-  const next = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-  const prev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-  const handleActive = (item: number) => setCurrentPage(item);
 
   return (
     <>
-      {loading ? (
-        <p>Loading blogs...</p>
-      ) : data.length === 0 ? (
+      {posts.length === 0 ? (
         <h3>No Blogs Found</h3>
       ) : (
-        data.map((item, i) => (
+        posts.map((item, i) => (
           <React.Fragment key={item.id || i}>
             {style === 1 && <BlogCard1 item={item} desc={desc} col={col} />}
             {style === 2 && <BlogCard2 item={item} desc={desc} col={col} />}
@@ -132,16 +73,14 @@ export default function BlogPost({
         ))
       )}
 
-      {showPagination && data.length > 0 && (
+      {showPagination && posts.length > 0 && (
         <>
           <div className="space60" />
           <Pagination
             getPaginationGroup={getPaginationGroup}
-            currentPage={currentPage}
-            pages={totalPages}
-            next={next}
-            prev={prev}
-            handleActive={handleActive}
+            currentPage={currentNumberPage}
+            totalPages={totalNumberOfPages}
+          
           />
         </>
       )}

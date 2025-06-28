@@ -2669,6 +2669,11 @@ h5 {
   border-radius: 2px;
 }
 
+.theme-pagination ul li.active  a  {
+  background: var(--vtc-bg-main1);
+  transition: all 0.3s;
+  color: var(--vtc-text-white);
+}
 .theme-pagination ul li a:hover {
   background: var(--vtc-bg-main1);
   transition: all 0.3s;
