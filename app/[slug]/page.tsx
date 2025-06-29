@@ -97,7 +97,7 @@ export type BlogData = {
 };
 
 
-export async function getBlogDetails(slug: string): Promise<BlogData | null> {
+async function getBlogDetails(slug: string): Promise<BlogData | null> {
 	try {
 		const res = await fetch(`${process.env.API_BASE_PATH}/posts/${slug}`, {
 			next: { revalidate: 600 },
@@ -173,8 +173,10 @@ export async function generateStaticParams() {
 	}));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-	const res = await fetch(`${process.env.API_BASE_PATH}/posts/${params.slug}`);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+	const { slug } = await params;
+
+	const res = await fetch(`${process.env.API_BASE_PATH}/posts/${slug}`);
 	const data = await res.json();
 
 	if (!data?.post) return {};
@@ -332,8 +334,8 @@ export default async function BlogDetailsPage({
 											</div>
 										) : (
 											comments.map(comment => (
-												<div className="comment-box">
-													<div className="top-area" key={comment.comment_ID}>
+												<div className="comment-box" key={comment.comment_ID}>
+													<div className="top-area">
 														<div className="author-area">
 															<div
 																style={{
