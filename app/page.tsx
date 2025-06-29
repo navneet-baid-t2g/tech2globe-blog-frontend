@@ -7,9 +7,9 @@ import CtaArea1 from "@/components/sections/CtaArea1";
 export default async function Home() {
   const limit = 20;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts?page=1&limit=${limit}`,
+    `${process.env.API_BASE_PATH}/posts?page=1&limit=${limit}`,
     {
-      next: { revalidate: 600 }, 
+      next: { revalidate: 600 },
     }
   );
 

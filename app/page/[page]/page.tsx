@@ -6,7 +6,7 @@ import BlogArea1 from "@/components/sections/BlogArea1";
 
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts?page=1&limit=200`);
+  const res = await fetch(`${process.env.API_BASE_PATH}/posts?page=1&limit=200`);
 
   if (!res.ok) {
     return [];
@@ -37,7 +37,7 @@ export default async function BlogPage({
   const limit = 20;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts?page=${currentPage}&limit=${limit}`,
+    `${process.env.API_BASE_PATH}/posts?page=${currentPage}&limit=${limit}`,
     {
       next: { revalidate: 600 },
     }

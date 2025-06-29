@@ -45,7 +45,7 @@ export default function BlogCard1({ col, item }: any) {
             </Link>
           </div>
           <h4>
-            <Link href="/blog-single">{decodeHTML(item.post_title)}</Link>
+            <Link href={`/${item.post_name}`}>{decodeHTML(item.post_title)}</Link>
           </h4>
           <p className="mt-16">
             {truncate(item.excerpt || cleanExcerpt(item.post_content), 200)}
@@ -55,10 +55,10 @@ export default function BlogCard1({ col, item }: any) {
               <div className="author-tumb pastel-avatar">
                 {(item.author_name
                   ? item.author_name
-                      .split(" ")
-                      .map((word: string) => word[0])
-                      .join("")
-                      .substring(0, 2)
+                    .split(" ")
+                    .map((word: string) => word[0])
+                    .join("")
+                    .substring(0, 2)
                   : "AU"
                 ).toUpperCase()}
               </div>
