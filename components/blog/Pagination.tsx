@@ -6,25 +6,37 @@ interface PaginationProps {
   currentPage: number;
   getPaginationGroup: number[];
   totalPages: number;
+  authorId?: string;
+  categoryId?: string;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   getPaginationGroup,
   totalPages,
+  authorId,
+  categoryId
 }) => {
-
   if (getPaginationGroup.length === 0) return null;
 
-  const basePath = "/page/";
-
+  // Function to generate correct link based on page number and IDs
+  const getLink = (page: number) => {
+    if (authorId) {
+      return page === 1 ? `/author/${authorId}` : `/author/${authorId}/page/${page}`;
+    } else if (categoryId) {
+      return page === 1 ? `/category/${categoryId}` : `/category/${categoryId}/page/${page}`;
+    }
+    else {
+      return page === 1 ? `/` : `/page/${page}`;
+    }
+  };
   return (
     <div className="theme-pagination text-center">
       <ul>
         {/* Prev Button */}
         {currentPage > 1 && (
           <li className="page-item">
-            <Link href={`${basePath}${currentPage - 1}`}>
+            <Link href={getLink(currentPage - 1)}>
               <i className="fa-solid fa-angle-left" />
             </Link>
           </li>
@@ -36,14 +48,14 @@ const Pagination: React.FC<PaginationProps> = ({
             key={item}
             className={currentPage === item ? "page-item active" : "page-item"}
           >
-            <Link href={`${basePath}${item}`}>{item}</Link>
+            <Link href={getLink(item)}>{item}</Link>
           </li>
         ))}
 
         {/* Next Button */}
         {currentPage < totalPages && (
           <li className="page-item">
-            <Link href={`${basePath}${currentPage + 1}`}>
+            <Link href={getLink(currentPage + 1)}>
               <i className="fa-solid fa-angle-right" />
             </Link>
           </li>

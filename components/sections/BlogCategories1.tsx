@@ -26,7 +26,7 @@ export default function BlogCategories1() {
 									<img src="/assets/img/blog/blog1-cetegroy-post1.png" alt="vexon" />
 								</div>
 								<div className="heading1 mt-16">
-									<h4><Link href="/social-media">Social Media </Link></h4>
+									<h4><Link href="/category/social-media-marketing">Social Media</Link></h4>
 								</div>
 							</div>
 						</div>
@@ -36,7 +36,7 @@ export default function BlogCategories1() {
 									<img src="/assets/img/blog/blog1-cetegroy-post2.png" alt="vexon" />
 								</div>
 								<div className="heading1 mt-16">
-									<h4><Link href="/social-media">Digital Marketing </Link></h4>
+									<h4><Link href="/category/digital-marketing">Digital Marketing</Link></h4>
 								</div>
 							</div>
 						</div>
@@ -46,7 +46,7 @@ export default function BlogCategories1() {
 									<img src="/assets/img/blog/blog1-cetegroy-post3.png" alt="vexon" />
 								</div>
 								<div className="heading1 mt-16">
-									<h4><Link href="/social-media">Startup Agency </Link></h4>
+									<h4><Link href="/category/ecommerce">Ecommerce</Link></h4>
 								</div>
 							</div>
 						</div>
@@ -56,7 +56,7 @@ export default function BlogCategories1() {
 									<img src="/assets/img/blog/blog1-cetegroy-post4.png" alt="vexon" />
 								</div>
 								<div className="heading1 mt-16">
-									<h4><Link href="/social-media">Design &amp; Development </Link></h4>
+									<h4><Link href="/category/software-development">Software Development</Link></h4>
 								</div>
 							</div>
 						</div>
@@ -66,7 +66,7 @@ export default function BlogCategories1() {
 									<img src="/assets/img/blog/blog1-cetegroy-post5.png" alt="vexon" />
 								</div>
 								<div className="heading1 mt-16">
-									<h4><Link href="/social-media">Life style </Link></h4>
+									<h4><Link href="/category/uncategorized">Uncategorized </Link></h4>
 								</div>
 							</div>
 						</div>

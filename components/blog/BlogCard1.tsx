@@ -1,10 +1,9 @@
 import Link from "next/link";
+import { decode } from 'html-entities';
 
 export default function BlogCard1({ col, item }: any) {
-  function decodeHTML(html: string) {
-    var txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
+  function decodeHTML(html: string): string {
+    return decode(html || "");
   }
   function cleanExcerpt(html: string): string {
     return html
@@ -37,7 +36,7 @@ export default function BlogCard1({ col, item }: any) {
         </div>
         <div className="heading1">
           <div className="social-area">
-            <Link href="/social-media" className="social">
+            <Link href={`/category/${item.categories[0].slug}`} className="social text-capitalize">
               {getCategory(item.categories)}
             </Link>
             <Link href="/categories" className="time">
@@ -62,7 +61,7 @@ export default function BlogCard1({ col, item }: any) {
                   : "AU"
                 ).toUpperCase()}
               </div>
-              <Link href="/author" className="author-text">
+              <Link href={`/author/${item.post_author}`} className="author-text">
                 {item.author_name || "Unknown Author"}
               </Link>
             </div>

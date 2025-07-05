@@ -17,18 +17,24 @@ interface BlogArea1Props {
   posts: BlogItem[];
   totalPages: number;
   currentPage: number;
+  showSidebar?: boolean;
+  authorId?: string;
+  categoryId?: string;
 }
 export default function BlogArea1({
   posts,
   totalPages,
   currentPage,
+  showSidebar = true,
+  authorId,
+  categoryId
 }: BlogArea1Props) {
   return (
     <>
       <div className="blog1 sp bg1 _relative">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8">
+            <div className={showSidebar ? "col-lg-8" : "col-lg-12"}>
               <div className="blog1-posts-area">
                 <div className="row">
                   <BlogPost
@@ -37,12 +43,14 @@ export default function BlogArea1({
                     currentNumberPage={currentPage}
                     style={1}
                     showPagination={true}
-                    col="col-md-6"
+                    authorId={authorId}
+                    categoryId={categoryId}
+                    col={showSidebar ? "col-md-6" : "col-md-4"}
                   />
                 </div>
               </div>
             </div>
-            <div className="col-lg-4">
+            {showSidebar && (<div className="col-lg-4">
               <div className="blog1-sidebar-area ml-30 sm:ml-0 md:ml-0 md:mt-30 sm:mt-30">
                 <div className="sidebar-widget_1 _search-area1">
                   <h3>Search</h3>
@@ -405,7 +413,7 @@ export default function BlogArea1({
                   </Link>
                 </div>
               </div>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>

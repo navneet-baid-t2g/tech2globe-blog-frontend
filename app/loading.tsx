@@ -2,8 +2,6 @@
 export default function Loading() {
 	return (
 		<>
-			
-
 			<div className="sec-preloader">
 				<div className="overlay-preloader flex cac vac" id="preloader">
 					<div>
@@ -18,8 +16,6 @@ export default function Loading() {
 					</div>
 				</div>
 			</div>
-
-
 		</>
 	)
 }

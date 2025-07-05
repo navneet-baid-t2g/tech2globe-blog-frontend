@@ -30,6 +30,8 @@ interface BlogPostProps {
   latest?: boolean;
   showStart?: number;
   showEnd?: number;
+  authorId?: string;
+  categoryId?: string;
 }
 
 export default function BlogPost({
@@ -40,21 +42,23 @@ export default function BlogPost({
   showPagination = true,
   desc = true,
   col = "col-lg-4",
+  authorId,
+  categoryId
 }: BlogPostProps) {
- const paginationItem = 4;
-const pagination = Array.from({ length: totalNumberOfPages }, (_, i) => i + 1);
+  const paginationItem = 4;
+  const pagination = Array.from({ length: totalNumberOfPages }, (_, i) => i + 1);
 
-// sliding window logic
-let start = currentNumberPage <= 3 ? 0 : currentNumberPage - 2;
-let end = start + paginationItem;
+  // sliding window logic
+  let start = currentNumberPage <= 3 ? 0 : currentNumberPage - 2;
+  let end = start + paginationItem;
 
-if (end > totalNumberOfPages) {
-  end = totalNumberOfPages;
-  start = Math.max(end - paginationItem, 0);
-}
+  if (end > totalNumberOfPages) {
+    end = totalNumberOfPages;
+    start = Math.max(end - paginationItem, 0);
+  }
 
-const getPaginationGroup = pagination.slice(start, end);
-console.log("current:", currentNumberPage, "start:", start, "end:", end);
+  const getPaginationGroup = pagination.slice(start, end);
+  console.log("current:", currentNumberPage, "start:", start, "end:", end);
 
 
   return (
@@ -80,7 +84,8 @@ console.log("current:", currentNumberPage, "start:", start, "end:", end);
             getPaginationGroup={getPaginationGroup}
             currentPage={currentNumberPage}
             totalPages={totalNumberOfPages}
-          
+            authorId={authorId}
+            categoryId={categoryId}
           />
         </>
       )}

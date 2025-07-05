@@ -7943,7 +7943,7 @@ h5 {
 
 .sidebar-details-widget_1._author-intro h4 {
   color: var(--vtc-text-black1);
-  font-size: var(--f-fs-font-fs32);
+  font-size: var(--f-fs-font-fs20);
   font-style: normal;
   font-weight: var(--f-fw-semibold);
   line-height: var(--f-fs-font-fs32);
@@ -10781,4 +10781,137 @@ li.has-dropdown1 span {
   border-radius: 4px;
   font-family: monospace;
   color: #d63384;
+}
+
+.category-directory {
+  background-color: #f8f9fa;
+}
+
+
+.search-bar {
+  position: relative;
+}
+
+.search-input {
+  padding-left: 45px;
+  border-radius: 50px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  border-color: var(--vtc-bg-main1);
+  box-shadow: 0 0 0 0.25rem rgba(78, 102, 248, 0.25);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.filter-buttons {
+  gap: 10px;
+}
+
+.btn-filter {
+  border-radius: 50px;
+  padding: 8px 20px;
+  background-color: #f1f3ff;
+  color: var(--vtc-bg-main1);
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn-filter:hover,
+.btn-filter.active {
+  background-color: var(--vtc-bg-main1);
+  color: white;
+}
+
+.alphabet-nav {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.alphabet-link {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin: 0 5px;
+  color: #495057;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.alphabet-link:hover {
+  background-color: var(--vtc-bg-main1);
+  color: white;
+}
+
+.letter-section {
+  padding: 20px 0;
+}
+
+.letter-header {
+  font-size: 2rem;
+  color: var(--vtc-bg-main1);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.category-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s;
+  display: block;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-card .card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.category-card:hover .card {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.category-name {
+  color: #212529;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.category-count {
+  font-size: 0.8rem;
+  font-weight: normal;
+  padding: 5px 10px;
+  background-color: var(--vtc-bg-main1);
+}
+
+@media (max-width: 768px) {
+  .alphabet-link {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.9rem;
+  }
+
+  .letter-header {
+    font-size: 1.5rem;
+  }
 }

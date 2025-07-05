@@ -9,6 +9,9 @@ import { Metadata } from 'next';
 
 export const revalidate = 600;
 
+type PageProps = {
+	params: Promise<{ slug: string }>
+}
 export type Category = {
 	name: string;
 	slug: string;
@@ -173,7 +176,7 @@ export async function generateStaticParams() {
 	}));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 	const { slug } = await params;
 
 	const res = await fetch(`${process.env.API_BASE_PATH}/posts/${slug}`);
@@ -208,9 +211,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 // ✅ Blog Details Page
 export default async function BlogDetailsPage({
 	params,
-}: {
-	params: Promise<{ slug: string }>
-}) {
+}: PageProps) {
 	const { slug } = await params
 
 	const blogData = await getBlogDetails(slug);
