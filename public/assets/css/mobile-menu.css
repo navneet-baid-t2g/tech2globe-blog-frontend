@@ -10,29 +10,32 @@ Desc:
 /*Base css*/
 
 @media screen and (max-width:769px) {
-    *{
+    * {
         margin: 0;
         padding: 0;
     }
-    body{
+
+    body {
         font-size: 16px;
         font-family: 'arial', sans-serif;
     }
-    
-    a, a:hover{
+
+    a,
+    a:hover {
         outline: none;
         text-decoration: none;
     }
-    
-    ul, li{
+
+    ul,
+    li {
         list-style: none;
     }
-    
-    
-    
+
+
+
     /*Menu Css*/
-    
-    .mobile-logo a{
+
+    .mobile-logo a {
         font-size: 20px;
         font-weight: 700;
         color: #000;
@@ -44,7 +47,7 @@ Desc:
         margin-top: -30px;
         margin-bottom: 10px;
     }
-    
+
     .mobile-header {
         position: fixed;
         top: 0;
@@ -78,18 +81,19 @@ Desc:
         z-index: 999;
         background: #fff;
     }
-    
+
     .mobile-header-elements {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
+
     .mobile-header-elements .mobile-logo {
         width: 160px;
     }
-    
+
     .mobile-nav-icon {
-        font-size: 23px; 
+        font-size: 23px;
         border: 1px solid;
         width: 40px;
         height: 40px;
@@ -99,7 +103,7 @@ Desc:
         border-radius: 4px;
         color: #000;
     }
-    
+
     .mobile-nav-icon {
         font-size: 23px;
         border: 1px solid;
@@ -111,12 +115,12 @@ Desc:
         border-radius: 4px;
         color: #000000;
     }
-    
+
     .mobile-sidebar {
         position: fixed;
         height: 100%;
         width: 100%;
-        background:#fff;
+        background: #fff;
         z-index: 9999;
         padding: 40px 30px;
         left: -100%;
@@ -125,6 +129,7 @@ Desc:
         opacity: 0;
         transition: all .3s;
     }
+
     .mobile-sidebar .logo-m {
         width: 140px;
     }
@@ -133,7 +138,7 @@ Desc:
         position: fixed;
         height: 100%;
         width: 100%;
-        background:#001936 !important;
+        background: #001936 !important;
         z-index: 9999;
         padding: 40px 30px;
         left: -100%;
@@ -164,7 +169,8 @@ Desc:
         background: #fff;
     }
 
-    .mobile-sidebar.mobile-sidebar2 span.submenu-button:after, span.submenu-button:before {
+    .mobile-sidebar.mobile-sidebar2 span.submenu-button:after,
+    span.submenu-button:before {
         position: absolute;
         content: "";
         height: 20px;
@@ -207,6 +213,7 @@ Desc:
         margin-bottom: 16px;
         margin-top: 20px;
     }
+
     .mobile-sidebar.mobile-sidebar2 .contact-infos ul li a {
         height: 40px;
         width: 40px;
@@ -221,18 +228,18 @@ Desc:
         margin: 24px 0px;
     }
 
-    
+
 
     .mobile-sidebar .logo-m {
         margin-top: -45px;
         margin-bottom: 20px;
     }
-    
-    .mobile-sidebar .contact-icon{
+
+    .mobile-sidebar .contact-icon {
         background: #fff;
     }
-    
-    
+
+
     .mobile-sidebar.mobile-menu-active {
         left: 0;
         visibility: visible;
@@ -242,7 +249,7 @@ Desc:
         max-height: 100%;
         overflow-y: scroll;
     }
-    
+
     .menu-close {
         position: absolute;
         right: 20px;
@@ -251,7 +258,7 @@ Desc:
         color: #000;
         cursor: pointer;
     }
-    
+
     .mobile-nav li a {
         font-size: 18px;
         line-height: 24px;
@@ -260,18 +267,18 @@ Desc:
         display: block;
         font-weight: 500;
     }
-    
-    
+
+
     ul.mobile-nav-list {
         margin-top: 30px;
     }
-    
-    
+
+
     li.has-children {
         position: relative;
         z-index: 2;
     }
-    
+
     span.mobile-nav-menu-icon {
         position: absolute;
         right: 0;
@@ -282,7 +289,7 @@ Desc:
         line-height: 50px;
         color: #fff;
     }
-    
+
     ul.mobile-menu-sub {
         display: none;
         position: relative;
@@ -290,20 +297,20 @@ Desc:
         padding-left: 10px;
         transition: all .3s;
     }
-    
-    ul.mobile-menu-sub.sub-menu-active{
+
+    ul.mobile-menu-sub.sub-menu-active {
         display: block;
         position: relative;
         transition: all .3s;
     }
-    
-    
-    
+
+
+
     .mobile-nav li {
         position: relative;
         z-index: 2;
     }
-    
+
     span.submenu-button {
         position: absolute;
         width: 100%;
@@ -313,8 +320,9 @@ Desc:
         z-index: 3;
         transition: all .3s;
     }
-    
-    span.submenu-button:after, span.submenu-button:before {
+
+    span.submenu-button:after,
+    span.submenu-button:before {
         position: absolute;
         content: "";
         height: 20px;
@@ -324,25 +332,25 @@ Desc:
         right: 9px;
         transition: all .3s;
     }
-    
+
     span.submenu-button:before {
         height: 2px;
         width: 20px;
         right: 0px;
         top: 22px;
     }
-    
+
     span.submenu-button.submenu-opened:after {
         visibility: hidden;
         opacity: 0;
     }
-    
-    .sub-menu{
+
+    .sub-menu {
         display: none;
         padding-left: 15px;
     }
-    
-    
+
+
     span.multi-drop-icon {
         position: absolute;
         right: 10px;
@@ -354,8 +362,8 @@ Desc:
         align-items: center;
         justify-content: flex-end;
     }
-    
-    
+
+
     ul.mobile-nav-list {
         max-height: 500px;
         overflow-y: scroll;
@@ -380,9 +388,9 @@ Desc:
     }
 
     .mobile-button a {
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
     }
 
 }
@@ -395,7 +403,7 @@ Desc:
 
 .mobile-menu-icon-box {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     padding: 5px 0;
 }
 
@@ -434,7 +442,8 @@ Desc:
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 26px; /* 100% */
+    line-height: 26px;
+    /* 100% */
     display: inline-block;
     margin-bottom: 16px;
     padding-left: 10px;
@@ -445,22 +454,24 @@ Desc:
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 100% */
+    line-height: 24px;
+    /* 100% */
     text-transform: capitalize;
     margin-bottom: 16px;
     margin-top: 20px;
-} 
+}
 
 .mobile-sidebar .contact-infos h3 {
     color: var(--Home-Page-3-Color-Text-Color, #070811);
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 100% */
+    line-height: 24px;
+    /* 100% */
     text-transform: capitalize;
     margin-bottom: 16px;
     margin-top: 20px;
-} 
+}
 
 .mobile-sidebar .contact-infos ul li {
     display: inline-block;

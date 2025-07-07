@@ -1,20 +1,27 @@
 import Link from "next/link";
 import { decode } from 'html-entities';
+import { fixThumbnailDomain } from "@/util/fixThumbnailDomain";
 
-export default function BlogCard1({ col, item }: any) {
+export default function BlogCard1({ col, item, animated = true }: any) {
   function decodeHTML(html: string): string {
     return decode(html || "");
   }
   function cleanExcerpt(html: string): string {
-    return html
-      .replace(/<!--[\s\S]*?-->/g, "") // Remove comments
-      .replace(/<[^>]*>/g, "") // Remove all HTML tags
+    if (!html) return "";
+    return decode(html)
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/\s+/g, " ")
       .trim();
   }
+
   function truncate(text: string, maxLength: number): string {
-    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+    const cleanText = text.trim();
+    return cleanText.length > maxLength
+      ? cleanText.slice(0, maxLength).trim() + "..."
+      : cleanText;
   }
-  function getCategory(category: []): string {
+  function getCategory(): string {
     return item.categories && item.categories.length > 0
       ? item.categories[0].name === "Uncategorized" &&
         item.categories.length > 1
@@ -22,26 +29,40 @@ export default function BlogCard1({ col, item }: any) {
         : item.categories[0].name
       : "General";
   }
+  function calculateReadingTime(text: string): string {
+    const wordsPerMinute = 200;
+    const cleanText = cleanExcerpt(text);
+    const wordCount = cleanText.split(/\s+/).length;
+    const time = Math.ceil(wordCount / wordsPerMinute);
+    return `${time || 1} min read`;
+  }
+
+
+  const thumbnailUrl = fixThumbnailDomain(item.thumbnail_url);
   return (
     <div
       className={col}
-      data-aos="fade-up"
-      data-aos-offset={50}
-      data-aos-duration={400}
-      data-aos-delay={0}
+      {...(animated && {
+        'data-aos': 'fade-up',
+        'data-aos-offset': '50',
+        'data-aos-duration': '400',
+        'data-aos-delay': '0',
+      })}
     >
+
       <div className="blog1-single-box mb-4">
         <div className="thumbnail image-anime">
-          <img src={`${item.thumbnail_url}`} alt={item.post_title} />
+          <img src={`${thumbnailUrl}`} alt={item.post_title} />
         </div>
         <div className="heading1">
           <div className="social-area">
-            <Link href={`/category/${item.categories[0].slug}`} className="social text-capitalize">
-              {getCategory(item.categories)}
+            <Link href={`/category/${item.categories[0].name === "Uncategorized" && item.categories.length > 1 ? item.categories[1].slug : item.categories[0].slug}`} className="social text-capitalize">
+              {getCategory()}
             </Link>
-            <Link href="/categories" className="time">
-              <img src="/assets/img/icons/time1.svg" alt="vexon" /> 3 min read
-            </Link>
+            <span className="time">
+              <img src="/assets/img/icons/time1.svg" alt="vexon" /> {calculateReadingTime(item.post_content)}
+            </span>
+
           </div>
           <h4>
             <Link href={`/${item.post_name}`}>{decodeHTML(item.post_title)}</Link>
@@ -66,11 +87,9 @@ export default function BlogCard1({ col, item }: any) {
               </Link>
             </div>
 
-            <div className="date">
-              <Link href="/#">
-                <img src="/assets/img/icons/date1.svg" alt="published_on" />
-                {new Date(item.post_date).toLocaleDateString("en-GB")}
-              </Link>
+            <div className="date d-flex align-items-center">
+              <img src="/assets/img/icons/date1.svg" alt="published_on" className="mr-2" />
+              {new Date(item.post_date).toLocaleDateString("en-GB")}
             </div>
           </div>
         </div>

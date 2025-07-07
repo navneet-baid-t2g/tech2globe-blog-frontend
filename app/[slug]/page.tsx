@@ -1,12 +1,14 @@
 import Layout from "@/components/layout/Layout"
 import Link from "next/link"
-import Sidebar from "./Sidebar"
+import Sidebar from "@/components/blog/Sidebar";
 import { notFound } from "next/navigation";
 import { decode } from 'html-entities';
 import { Metadata } from 'next';
-
-
-
+import BlogCard1 from "@/components/blog/BlogCard1";
+import SocialShare from "@/components/blog/SocialShare";
+import { fixThumbnailDomain } from "@/util/fixThumbnailDomain";
+import TableOfContents from "@/util/TableOfContents";
+import CommentForm from "@/components/blog/CommentForm";
 export const revalidate = 600;
 
 type PageProps = {
@@ -97,6 +99,7 @@ export type BlogData = {
 	post: BlogPost;
 	comments: Comment[];
 	author?: Author;
+	relatedPosts: BlogPost[];
 };
 
 
@@ -107,20 +110,19 @@ async function getBlogDetails(slug: string): Promise<BlogData | null> {
 		});
 
 		if (!res.ok) {
-			console.error("Post fetch failed with status:", res.status);
 			return null;
 		}
 
 		const data = await res.json();
 
 		if (!data?.post) {
-			console.warn("No post found in response");
 			return null;
 		}
 
 		const blogData: BlogData = {
 			post: data.post,
 			comments: data.comments || [],
+			relatedPosts: [],
 		};
 
 		// Fetch author if post_author exists
@@ -130,20 +132,32 @@ async function getBlogDetails(slug: string): Promise<BlogData | null> {
 					`${process.env.API_BASE_PATH}/authors/${data.post.post_author}`
 				);
 
-				if (!authorRes.ok) {
-					console.warn("Author fetch failed with status:", authorRes.status);
-				} else {
+				if (authorRes.ok) {
 					const authorJson = await authorRes.json();
 					const authors = authorJson?.authors;
 
 					if (Array.isArray(authors) && authors.length > 0) {
 						blogData.author = authors[0];
-					} else {
-						console.warn("No authors found in author response.");
 					}
 				}
 			} catch (authorError) {
 				console.error("Error fetching author data:", authorError);
+			}
+		}
+		// Fetch related posts based on first category name
+		if (data.post.categories && data.post.categories.length > 0) {
+			const categoryName = data.post.categories[0].name;
+			try {
+				const relatedRes = await fetch(
+					`${process.env.API_BASE_PATH}/posts/related?categoryName=${encodeURIComponent(categoryName)}`
+				);
+
+				if (relatedRes.ok) {
+					const relatedJson = await relatedRes.json();
+					blogData.relatedPosts = relatedJson?.data?.posts || [];
+				}
+			} catch (relatedError) {
+				console.error("Error fetching related posts:", relatedError);
 			}
 		}
 
@@ -208,7 +222,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 		},
 	};
 }
-// ✅ Blog Details Page
 export default async function BlogDetailsPage({
 	params,
 }: PageProps) {
@@ -255,10 +268,17 @@ export default async function BlogDetailsPage({
 												<div className="social-area">
 													<div className="author-area">
 														<div className="author">
-															<div className="author-tumb">
-																<img src="/assets/img/blog/blog1-author1.png" alt="vexon" />
+															<div className="author-tumb pastel-avatar">
+																{(post?.author_name
+																	? post?.author_name
+																		.split(" ")
+																		.map((word: string) => word[0])
+																		.join("")
+																		.substring(0, 2)
+																	: "AU"
+																).toUpperCase()}
 															</div>
-															<Link href="/author" className="author-text">{post?.author_name}</Link>
+															<Link href={`/author/${post?.post_author}`} className="author-text">{post?.author_name}</Link>
 														</div>
 														<div className="date">
 															<Link href="/#"><img src="/assets/img/icons/date1.svg" alt="vexon" /> {new Date(post.post_date).toLocaleDateString("en-GB")} </Link>
@@ -267,13 +287,23 @@ export default async function BlogDetailsPage({
 													{/* <Link href="/categories" className="time mt-16"><img src="/assets/img/icons/time1.svg" alt="vexon" /> 3 min read</Link> */}
 												</div>
 												<h1>{decode(post?.post_title || '')}</h1>
-												<p className="mt-16">{post?.post_excerpt}</p>
+												<div className="tags-social-area">
+													<SocialShare
+														showFacebook={true}
+														showTwitter={true}
+														showInstagram={true}
+														showWhatsApp={true}
+														showPinterest={true}
+														showEmail={true}
+														showNativeShare={true} />
+												</div>
+
 											</div>
 										</div>
 									</div>
 									<div className="col-lg-7">
 										<div className="thumbnail image-anime _relative mt-20">
-											<img src={`${post?.thumbnail_url}}`} alt={`${decode(post?.post_title || '')}`} />
+											<img src={`${fixThumbnailDomain(post?.thumbnail_url)}}`} alt={`${decode(post?.post_title || '')}`} />
 										</div>
 									</div>
 								</div>
@@ -292,33 +322,30 @@ export default async function BlogDetailsPage({
 									<div className="comments-area">
 										<div className="tags-social-area">
 											<div className="row align-items-center">
+												{post?.tags?.length > 0 && (
+													<div className="col-md-12 mb-4">
+														<div className="tags">
+															<ul>
+																<li className="text">Tag Cloud:</li>
+																{post?.tags?.map((tag: { name: string; slug: string }) => (
+																	<li key={tag.slug} className="mt-3">
+																		<span>{tag.name}</span>
+																	</li>
+																))}
+															</ul>
+														</div>
+													</div>
+												)}
 												<div className="col-md-12">
-													<div className="tags">
-														<ul>
-															<li className="text">Tag Cloud:</li>
-															{post?.tags?.map((tag: { name: string; slug: string }) => (
-																<li key={tag.slug} className="mt-3">
-																	<Link href="#">{tag.name}</Link>
-																</li>
-															))}
-														</ul>
-													</div>
-												</div>
-												<div className="col-md-12 mt-4">
-													<div className="social footer-social1 text-start">
-														<ul>
-															<li className="text">Share:</li>
-															<li>
-																<Link href="/#"><i className="fa-brands fa-facebook-f" /></Link>
-															</li>
-															<li>
-																<Link href="/#"><i className="fa-brands fa-instagram" /></Link>
-															</li>
-															<li>
-																<Link href="/#"><i className="fa-brands fa-linkedin-in" /></Link>
-															</li>
-														</ul>
-													</div>
+													<SocialShare
+														showFacebook={true}
+														showTwitter={true}
+														showInstagram={true}
+														showWhatsApp={true}
+														showPinterest={true}
+														showEmail={true}
+														showNativeShare={true}
+													/>
 												</div>
 											</div>
 										</div>
@@ -375,43 +402,7 @@ export default async function BlogDetailsPage({
 											<h5>Leave a Reply</h5>
 											<p className="mt-10">Provide clear contact information, including phone number, email, and address.</p>
 										</div>
-										<form action="#">
-											<div className="row">
-												<div className="col-md-6">
-													<div className="single-input">
-														<input type="text" placeholder="First Name" />
-													</div>
-												</div>
-												<div className="col-md-6">
-													<div className="single-input">
-														<input type="text" placeholder="Last Name" />
-													</div>
-												</div>
-												<div className="col-md-6">
-													<div className="single-input">
-														<input type="email" placeholder="Email" />
-													</div>
-												</div>
-												<div className="col-md-6">
-													<div className="single-input">
-														<input type="number" placeholder="Phone" />
-													</div>
-												</div>
-												<div className="col-md-12">
-													<div className="single-input">
-														<input type="text" placeholder="Subject" />
-													</div>
-												</div>
-												<div className="col-md-12">
-													<div className="single-input">
-														<textarea rows={5} placeholder="Message" />
-													</div>
-													<div className="button mt-30">
-														<button className="theme-btn1" type="submit">Get Started</button>
-													</div>
-												</div>
-											</div>
-										</form>
+										<CommentForm postId={post.ID} />
 									</div>
 								</div>
 							</div>
@@ -422,100 +413,29 @@ export default async function BlogDetailsPage({
 					</div>
 				</div>
 				{/*===== BLOG DETAILS AREA START=======*/}
-				{/*===== BLOG AREA START=======*/}
-				<div className="details-page-boxs sp bg1">
-					<div className="container">
-						<div className="row">
-							<div className="col-lg-6 m-auto text-center">
-								<div className="heading1">
-									<h2>More Blogs</h2>
-								</div>
-							</div>
-						</div>
-						<div className="space30" />
-						<div className="row">
-							<div className="col-md-6 col-lg-4">
-								<div className="blog1-single-box mt-30">
-									<div className="thumbnail image-anime">
-										<img src="/assets/img/blog/blog1-image6.png" alt="vexon" />
-									</div>
+				{blogData.relatedPosts.length > 0 ? (
+					<div className="details-page-boxs sp bg1">
+						<div className="container">
+							<div className="row">
+								<div className="col-lg-6 m-auto text-center">
 									<div className="heading1">
-										<div className="social-area">
-											<Link href="/social-media" className="social">Brand Consistency</Link>
-											<Link href="/categories" className="time"><img src="/assets/img/icons/time1.svg" alt="vexon" /> 3 min read</Link>
-										</div>
-										<h4><Link href="/blog-single">Creating a Visual Identity: Tips for Aesthetic and Brand Consistency </Link></h4>
-										<p className="mt-16">This post covers tips on color schemes, fonts, and visuals to keep your profile visually appealing and cohesive.</p>
-										<div className="author-area">
-											<div className="author">
-												<div className="author-tumb">
-													<img src="/assets/img/blog/blog1-author5.png" alt="vexon" />
-												</div>
-												<Link href="/#" className="author-text">Katie Sims</Link>
-											</div>
-											<div className="date">
-												<Link href="/#"><img src="/assets/img/icons/date1.svg" alt="vexon" /> Nov 6, 2025 </Link>
-											</div>
-										</div>
+										<h2>More Related Blogs</h2>
 									</div>
 								</div>
 							</div>
-							<div className="col-md-6 col-lg-4">
-								<div className="blog1-single-box mt-30">
-									<div className="thumbnail image-anime">
-										<img src="/assets/img/blog/blog1-image7.png" alt="vexon" />
-									</div>
-									<div className="heading1">
-										<div className="social-area">
-											<Link href="/social-media" className="social">Gen - Z</Link>
-											<Link href="/categories" className="time"><img src="/assets/img/icons/time1.svg" alt="vexon" /> 3 min read</Link>
-										</div>
-										<h4><Link href="/blog-single">How to Build Authentic Connections with the New Generation</Link></h4>
-										<p className="mt-16">Gen Z is reshaping digital interaction. Learn what matters to this generation and how to create authentic, meaningful content.</p>
-										<div className="author-area">
-											<div className="author">
-												<div className="author-tumb">
-													<img src="/assets/img/blog/blog1-author5.png" alt="vexon" />
-												</div>
-												<Link href="/author" className="author-text">David Elson</Link>
-											</div>
-											<div className="date">
-												<Link href="/#"><img src="/assets/img/icons/date1.svg" alt="vexon" /> Oct 26, 2025 </Link>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className="col-md-6 col-lg-4">
-								<div className="blog1-single-box mt-30">
-									<div className="thumbnail image-anime">
-										<img src="/assets/img/blog/blog1-image8.png" alt="vexon" />
-									</div>
-									<div className="heading1">
-										<div className="social-area">
-											<Link href="/social-media" className="social">Social Media</Link>
-											<Link href="/categories" className="time"><img src="/assets/img/icons/time1.svg" alt="vexon" /> 3 min read</Link>
-										</div>
-										<h4><Link href="/blog-single">Harnessing Analytics: Using Data to Refine Your Social Media Strategy</Link></h4>
-										<p className="mt-16">Gen Z is reshaping digital interaction. Learn what matters to this generation and how to create authentic, meaningful content.</p>
-										<div className="author-area">
-											<div className="author">
-												<div className="author-tumb">
-													<img src="/assets/img/blog/blog1-author5.png" alt="vexon" />
-												</div>
-												<Link href="/author" className="author-text">Kenneth Allen</Link>
-											</div>
-											<div className="date">
-												<Link href="/#"><img src="/assets/img/icons/date1.svg" alt="vexon" /> Oct 26, 2025 </Link>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div className="space30" />
+							<div className="row">
+								{
+									blogData.relatedPosts.map(post => (
+										<BlogCard1 col="col-md-6 col-lg-4" item={post} key={post.ID} animated={false} />
+									))
+								}
 							</div>
 						</div>
 					</div>
-				</div>
-				{/*===== BLOG AREA START=======*/}
+				) : (
+					null
+				)}
 				{/*===== CTA AREA START=======*/}
 				<div className="cta1">
 					<div className="container">
