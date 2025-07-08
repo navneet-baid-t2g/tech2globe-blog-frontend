@@ -8,7 +8,20 @@ import CtaArea1 from "@/components/sections/CtaArea1";
 type AuthorPageProps = {
 	params: Promise<{ author_id: string }>
 }
-
+export type RecentBlogPosts={
+	ID: number;
+    post_author: number;
+    post_date: string;
+    post_modified: string;
+    post_content: string;
+    post_excerpt: string;
+    post_status: string;
+    post_name: string;
+    thumbnail_url: string;
+    author_name: string;
+    categories: string;
+    tags: string;
+}
 export async function generateMetadata({ params }: AuthorPageProps): Promise<Metadata> {
 	const { author_id } = await params;
 
@@ -61,6 +74,14 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 		},
 	};
 }
+async function getRecentPosts(): Promise<RecentBlogPosts[]> {
+  const res = await fetch(
+	`${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts/recent`
+  );
+  const json = await res.json();
+  const recentPosts = json.data.posts.slice(0, 3);
+  return recentPosts;
+}
 export default async function Author({
 	params,
 }: AuthorPageProps) {
@@ -87,11 +108,12 @@ export default async function Author({
 	});
 	if (!res.ok) {
 		notFound();
-	}
+	} 
 
 	const json = await res.json();
 	const posts = json?.data?.posts || [];
 	const totalPages = json?.data?.pagination?.totalPages || 1;
+	const recentPosts = await getRecentPosts();
 
 	return (
 		<>
@@ -118,8 +140,8 @@ export default async function Author({
 						</div>
 					</div>
 					{/*===== HERO AREA END=======*/}
-					{/*===== BLOG AREA START=======*/}
-					<BlogArea1 posts={posts} totalPages={totalPages} currentPage={1} authorId={author_id} />
+					{/*===== BLOG AREA START=======*/} 
+					<BlogArea1 posts={posts} totalPages={totalPages} currentPage={1} authorId={author_id} recentPosts={recentPosts} showAuthor={true} author={author} />
 					{/*===== BLOG AREA END=======*/}
 					<BlogCategories1 />
 					<CtaArea1 />

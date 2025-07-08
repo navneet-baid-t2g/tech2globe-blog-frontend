@@ -8,6 +8,20 @@ import CtaArea1 from "@/components/sections/CtaArea1";
 type PageProps = {
     params: Promise<{ category_slug: string, page: string }>;
 }
+export type RecentBlogPosts = {
+  ID: number;
+  post_author: number;
+  post_date: string;
+  post_modified: string;
+  post_content: string;
+  post_excerpt: string;
+  post_status: string;
+  post_name: string;
+  thumbnail_url: string;
+  author_name: string;
+  categories: string;
+  tags: string;
+};
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { category_slug } = await params;
 
@@ -71,6 +85,14 @@ export async function generateStaticParams() {
     }
     return params;
 }
+async function getRecentPosts(): Promise<RecentBlogPosts[]> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts/recent`
+  );
+  const json = await res.json();
+  const recentPosts = json.data.posts.slice(0, 3);
+  return recentPosts;
+}
 
 export default async function CategoryPage({
     params,
@@ -102,6 +124,8 @@ export default async function CategoryPage({
         .join(' ');
 
     if (currentPage > totalPages) notFound();
+      const recentPosts = await getRecentPosts();
+
     return (
         <>
             <Layout headerStyle={1} footerStyle={1}>
@@ -128,7 +152,7 @@ export default async function CategoryPage({
                     </div>
                     {/*===== HERO AREA END=======*/}
                     {/*===== BLOG AREA START=======*/}
-                    <BlogArea1 posts={posts} totalPages={totalPages} currentPage={currentPage} categoryId={category_slug} showSidebar={false} />
+                    <BlogArea1 posts={posts} totalPages={totalPages} currentPage={currentPage} categoryId={category_slug} showSidebar={false}   recentPosts={recentPosts} />
                     <CtaArea1 />
                 </div>
             </Layout>

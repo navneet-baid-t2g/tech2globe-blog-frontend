@@ -52,7 +52,7 @@ export default function BlogCard1({ col, item, animated = true }: any) {
 
       <div className="blog1-single-box mb-4">
         <div className="thumbnail image-anime">
-          <img src={`${thumbnailUrl}`} alt={item.post_title} />
+          <img src={`${thumbnailUrl}`} alt={item.post_title}  loading="lazy" className="img-fluid"/>
         </div>
         <div className="heading1">
           <div className="social-area">

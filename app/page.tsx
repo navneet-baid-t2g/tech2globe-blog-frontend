@@ -3,8 +3,28 @@ import BlogArea1 from "@/components/sections/BlogArea1";
 import BlogCategories1 from "@/components/sections/BlogCategories1";
 import CtaArea1 from "@/components/sections/CtaArea1";
 import HeroArea1 from "@/components/sections/HeroArea1";
-// import HeroArea1 from "@/components/sections/HeroArea1";
-
+export type RecentBlogPosts={
+	ID: number;
+    post_author: number;
+    post_date: string;
+    post_modified: string;
+    post_content: string;
+    post_excerpt: string;
+    post_status: string;
+    post_name: string;
+    thumbnail_url: string;
+    author_name: string;
+    categories: string;
+    tags: string;
+}
+async function getRecentPosts(): Promise<RecentBlogPosts[]> {
+  const res = await fetch(
+  `${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts/recent`
+  );
+  const json = await res.json();
+  const recentPosts = json.data.posts.slice(0, 3);
+  return recentPosts;
+}
 export default async function Home() {
   const limit = 20;
   const res = await fetch(
@@ -17,11 +37,12 @@ export default async function Home() {
   const json = await res.json();
   const posts = json?.data?.posts || [];
   const totalPages = json?.data?.pagination?.totalPages || 1;
+	const recentPosts = await getRecentPosts();
 
   return (
     <Layout headerStyle={1} footerStyle={1}>
       <HeroArea1 />
-      <BlogArea1 posts={posts} totalPages={totalPages} currentPage={1} />
+      <BlogArea1 posts={posts} totalPages={totalPages} currentPage={1} recentPosts={recentPosts} />
       <BlogCategories1 />
       <CtaArea1 />
     </Layout>

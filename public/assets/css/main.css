@@ -1,11 +1,8 @@
 /*
 ============================
-Name: Vexon - Modern Blog Template 
+Name: Tech2globe - Blog 
 Version: 1.0.0
-Description: Vexon - Modern Blog Template 
-Author: alithemes
-Author URI: https://themeforest.net/user/alithemes
-Location:
+Description: Tech2Globe - Blog 
 ============================
 */
 /*
@@ -1931,7 +1928,7 @@ body.body {
   --vtc-text-gray2: #4F525E;
   --vtc-text-gray3: #525258;
   --vtc-text-white: #fff;
-  --vtc-bg-main1: #4B1AB3;
+  --vtc-bg-main1: #234268;
   --vtc-bg-main2: linear-gradient(90deg, #6740D0 0%, #726EFC 100%);
   --vtc-bg-main3: #726EFC;
   --vtc-bg-main4: #FF138C;
@@ -3757,7 +3754,7 @@ h5 {
   padding: 40px;
   border-radius: 8px;
   margin-top: 100px;
-  margin-bottom: 100px;
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -4501,12 +4498,12 @@ h5 {
 
 .overlay-preloader .preloader .logo {
   opacity: 0;
-  animation-delay: 0.5s;
+  animation-delay: 0.2s;
   display: block;
   width: 40%;
   margin: 0px auto;
   text-align: center;
-  background: transparent url(../img/logo/preloader-logo1.svg) no-repeat center center;
+  background: transparent url(../img/logo/tech2globe-earth-logo.webp) no-repeat center center;
   background-size: contain;
   text-indent: -99999px;
   height: 100px;
