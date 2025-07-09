@@ -23,7 +23,7 @@ export default function BlogCategories1() {
 						<div className="col-lg col-md-6" data-aos="fade-up" data-aos-offset={50} data-aos-duration={400} data-aos-delay={450}>
 							<div className="blog1-cetegory-box mt-30 text-center">
 								<div className="image image-anime">
-									<img src="/assets/img/blog/blog1-cetegroy-post1.png" alt="vexon" />
+									<img src="/assets/img/blog/blog1-cetegroy-post1.png" alt="Social Media"  loading="lazy"/>
 								</div>
 								<div className="heading1 mt-16">
 									<h4><Link href="/category/social-media-marketing">Social Media</Link></h4>
@@ -33,7 +33,7 @@ export default function BlogCategories1() {
 						<div className="col-lg col-md-6" data-aos="fade-up" data-aos-offset={50} data-aos-duration={400} data-aos-delay={400}>
 							<div className="blog1-cetegory-box mt-30 text-center">
 								<div className="image image-anime">
-									<img src="/assets/img/blog/blog1-cetegroy-post2.png" alt="vexon" />
+									<img src="/assets/img/blog/blog1-cetegroy-post2.png" alt="Digital Marketing" loading="lazy" />
 								</div>
 								<div className="heading1 mt-16">
 									<h4><Link href="/category/digital-marketing">Digital Marketing</Link></h4>
@@ -43,7 +43,7 @@ export default function BlogCategories1() {
 						<div className="col-lg col-md-6" data-aos="fade-up" data-aos-offset={50} data-aos-duration={400} data-aos-delay={350}>
 							<div className="blog1-cetegory-box mt-30 text-center">
 								<div className="image image-anime">
-									<img src="/assets/img/blog/blog1-cetegroy-post3.png" alt="vexon" />
+									<img src="/assets/img/blog/blog1-cetegroy-post3.png" alt="Ecommerce"  loading="lazy"/>
 								</div>
 								<div className="heading1 mt-16">
 									<h4><Link href="/category/ecommerce">Ecommerce</Link></h4>
@@ -53,7 +53,7 @@ export default function BlogCategories1() {
 						<div className="col-lg col-md-6" data-aos="fade-up" data-aos-offset={50} data-aos-duration={400} data-aos-delay={300}>
 							<div className="blog1-cetegory-box mt-30 text-center">
 								<div className="image image-anime">
-									<img src="/assets/img/blog/blog1-cetegroy-post4.png" alt="vexon" />
+									<img src="/assets/img/blog/blog1-cetegroy-post4.png" alt="Software Development" loading="lazy" />
 								</div>
 								<div className="heading1 mt-16">
 									<h4><Link href="/category/software-development">Software Development</Link></h4>
@@ -63,7 +63,7 @@ export default function BlogCategories1() {
 						<div className="col-lg col-md-6" data-aos="fade-up" data-aos-offset={50} data-aos-duration={400} data-aos-delay={250}>
 							<div className="blog1-cetegory-box mt-30 text-center">
 								<div className="image image-anime">
-									<img src="/assets/img/blog/blog1-cetegroy-post5.png" alt="vexon" />
+									<img src="/assets/img/blog/blog1-cetegroy-post5.png" alt="Uncategorized" loading="lazy" />
 								</div>
 								<div className="heading1 mt-16">
 									<h4><Link href="/category/uncategorized">Uncategorized </Link></h4>

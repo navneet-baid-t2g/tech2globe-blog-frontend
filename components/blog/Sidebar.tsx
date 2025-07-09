@@ -210,7 +210,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="feed-all">
           <div className="row g-3">
             {posts.map((post, index) => (
-              <div className="col-md-4 col-sm-6 col-12" key={post.id}>
+              <div className="col-md-4 col-sm-6 col-6" key={post.id}>
                 <div
                   className={`feed-single position-relative ${
                     index >= 3 ? "mt-3" : ""
