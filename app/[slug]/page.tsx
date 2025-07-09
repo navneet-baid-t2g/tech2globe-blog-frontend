@@ -8,6 +8,8 @@ import BlogCard1 from "@/components/blog/BlogCard1";
 import SocialShare from "@/components/blog/SocialShare";
 import { fixThumbnailDomain } from "@/util/fixThumbnailDomain";
 import CommentForm from "@/components/blog/CommentForm";
+import Image from "next/image";
+import { gifPlaceholder } from "@/components/layout/Placeholder";
 export const revalidate = 600;
 
 type PageProps = {
@@ -270,7 +272,9 @@ export default async function BlogDetailsPage({ params }: PageProps) {
     },
     headline:
       blogData.post.yoastMeta[0].open_graph_title || blogData.post.post_title,
-    description: blogData.post.yoastMeta[0].open_graph_description || blogData.post.post_excerpt,
+    description:
+      blogData.post.yoastMeta[0].open_graph_description ||
+      blogData.post.post_excerpt,
     image: {
       "@type": "ImageObject",
       url: blogData.post.thumbnail_url,
@@ -395,9 +399,15 @@ export default async function BlogDetailsPage({ params }: PageProps) {
                     </div>
                     <div className="col-lg-7">
                       <div className="thumbnail image-anime _relative mt-20">
-                        <img
+                        <Image
                           src={`${fixThumbnailDomain(post?.thumbnail_url)}}`}
                           alt={`${decode(post?.post_title || "")}`}
+                          placeholder="blur"
+                          blurDataURL={gifPlaceholder}
+                          width={1000}
+                          height={800}
+                          className="img-fluid"
+                          priority
                         />
                       </div>
                     </div>

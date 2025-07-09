@@ -16,7 +16,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
             <div className="mobile-header-elements">
               <div className="mobile-logo">
                 <Link href="/index1">
-                  <img src="/assets/img/logo/header-logo1.png" alt="vexon" />
+                  <img src="/assets/img/logo/tech2globe-logo.png" alt="Tech2Globe" />
                 </Link>
               </div>
               <div className="mobile-nav-icon" onClick={handleMobileMenu}>
@@ -33,7 +33,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
       >
         <div className="logo-m">
           <Link href="/">
-            <img src="/assets/img/logo/header-logo1.png" alt="vexon" />
+            <img src="/assets/img/logo/tech2globe-logo.png" alt="Tech2Globe" />
           </Link>
         </div>
         <div className="menu-close" onClick={handleMobileMenu}>
@@ -43,9 +43,6 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
           <ul>
             <li className="has-dropdown">
               <span
-                className={`submenu-button ${
-                  isAccordion == 1 ? "submenu-opened" : ""
-                }`}
                 onClick={() => handleAccordion(1)}
               >
                 <em />
@@ -296,10 +293,6 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
                 </li>
               </ul>
             </li>
-
-            <li>
-              <Link href={`${process.env.NEXT_PUBLIC_BASE_PATH}/contact-us`}>Contact Us</Link>
-            </li>
           </ul>
 
           <div className="mobile-button">
@@ -324,11 +317,8 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
                 <img src="/assets/img/icons/footer1-icon2.svg" alt="vexon" />
               </div>
               <div className="text">
-                <Link href="/#">
-                  123 Innovation Drive,
-                  <br />
-                  Tech City, ST 12345, USA
-                </Link>
+                  701, 7th Floor, Tower B, Logix Cyber Park,
+                  <br/>C Block, Phase 2, Sector 62<br/>Noida, Uttar Pradesh 201301
               </div>
             </div>
             <div className="contact-box d-flex">
@@ -336,7 +326,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
                 <img src="/assets/img/icons/footer1-icon3.svg" alt="vexon" />
               </div>
               <div className="text">
-                <Link href="/tel:123-456-7890">123-456-7890</Link>
+                <Link href="tel: +91-9899675039">+91-9899675039</Link>
               </div>
             </div>
           </div>
@@ -344,22 +334,27 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
             <h3>Our Social Network</h3>
             <ul className="social-icon">
               <li>
-                <Link href="/#">
+                <Link href="https://www.facebook.com/tech2globe.software">
+                  <i className="fa-brands fa-facebook" />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://www.linkedin.com/company/tech2globe">
                   <i className="fa-brands fa-linkedin-in" />
                 </Link>
               </li>
               <li>
-                <Link href="/#">
+                <Link href="https://twitter.com/Tech2Globe">
                   <i className="fa-brands fa-x-twitter" />
                 </Link>
               </li>
               <li>
-                <Link href="/#">
+                <Link href="https://www.youtube.com/user/Tech2Globe">
                   <i className="fa-brands fa-youtube" />
                 </Link>
               </li>
               <li>
-                <Link href="/#">
+                <Link href="https://www.instagram.com/tech2globeweb/">
                   <i className="fa-brands fa-instagram" />
                 </Link>
               </li>
