@@ -5,7 +5,7 @@ export default function HeroArea1() {
         <div className="container">
           <div
             className="hero1-bg bg-cover"
-            style={{ backgroundImage: "url(/assets/img/bg/hero1-bg.jpg)" }}
+            style={{ backgroundImage: "url(/assets/img/bg/hero1-bg.avif)" }}
           >
             <div className="row align-items-center">
               <div className="col-lg-5">
