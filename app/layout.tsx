@@ -1,13 +1,13 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
 
 import "/public/assets/css/bootstrap.min.css";
 import "/public/assets/css/fontawesome.css";
-import "/public/assets/css/magnific-popup.css";
+// import "/public/assets/css/magnific-popup.css";
 import "/public/assets/css/nice-select.css";
 // import "/public/assets/css/slick-slider.css"
 import "/public/assets/css/owl.carousel.min.css";
