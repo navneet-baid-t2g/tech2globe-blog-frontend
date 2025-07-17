@@ -246,7 +246,7 @@ export default function Header1({
                     </ul>
                   </div>
                   <div className="header1-buttons">
-                    <div className="vl-search-top">
+                    <div className="vl-search-top d-none">
                       <button
                         className="search-open-btn"
                         onClick={handleSearch}
