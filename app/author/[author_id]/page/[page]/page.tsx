@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import BlogCategories1 from "@/components/sections/BlogCategories1";
 import CtaArea1 from "@/components/sections/CtaArea1";
 import BlogArea1 from "@/components/sections/BlogArea1";
+import Link from "next/link";
 type PageProps = {
   params: Promise<{ author_id: string; page: string }>;
 };
@@ -98,21 +99,21 @@ export async function generateStaticParams() {
   }
 
   return params;
-  }
-  export type RecentBlogPosts={
-    ID: number;
-      post_author: number;
-      post_date: string;
-      post_modified: string;
-      post_content: string;
-      post_excerpt: string;
-      post_status: string;
-      post_name: string;
-      thumbnail_url: string;
-      author_name: string;
-      categories: string;
-      tags: string;
-  }
+}
+export type RecentBlogPosts = {
+  ID: number;
+  post_author: number;
+  post_date: string;
+  post_modified: string;
+  post_content: string;
+  post_excerpt: string;
+  post_status: string;
+  post_name: string;
+  thumbnail_url: string;
+  author_name: string;
+  categories: string;
+  tags: string;
+};
 async function getRecentPosts(): Promise<RecentBlogPosts[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_PATH}/posts/recent`
@@ -124,14 +125,17 @@ async function getRecentPosts(): Promise<RecentBlogPosts[]> {
 export default async function AuthorPage({ params }: PageProps) {
   const { author_id, page } = await params;
   // Fetch Author Details
-	const authorRes = await fetch(`${process.env.API_BASE_PATH}/authors/${author_id}`, {
-		next: { revalidate: 600 },
-	});
-	if (!authorRes.ok) {
-		notFound();
-	}
-	const authorJson = await authorRes.json();
-	const author = authorJson?.authors?.[0];
+  const authorRes = await fetch(
+    `${process.env.API_BASE_PATH}/authors/${author_id}`,
+    {
+      next: { revalidate: 600 },
+    }
+  );
+  if (!authorRes.ok) {
+    notFound();
+  }
+  const authorJson = await authorRes.json();
+  const author = authorJson?.authors?.[0];
   if (!author_id) {
     notFound();
   }
@@ -167,14 +171,49 @@ export default async function AuthorPage({ params }: PageProps) {
 
   return (
     <Layout headerStyle={1} footerStyle={1}>
+      .
+      <div
+        className="inner-hero-secondary py-3 text-center border-top border-bottom"
+        style={{ backgroundColor: "#F3F4F6" }}
+      >
+        <div className="container">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-lg-8">
+              <div className="main-heading">
+                <div className="page-prog">
+                  <Link href="/">Home</Link>
+                  <span>
+                    <i className="fa-solid fa-angle-right" />
+                  </span>
+                  <p>Blog</p>
+                  <span>
+                    <i className="fa-solid fa-angle-right" />
+                  </span>
+                  <p className="bold">Author</p>
+                </div>
+                <h1 className="display-6 fw-bold">{author.displayName}</h1>
+                <p className="lead mb-0">
+                  {currentPage > 1 && (
+                    <span className="text-muted fs-5">
+                      {" "}
+                      - Page {currentPage}
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <BlogArea1
         posts={posts}
         totalPages={totalPages}
-        currentPage={1}
+        currentPage={currentPage}
         authorId={author_id}
         recentPosts={recentPosts}
-        showAuthor={true} author={author} 
-      /> 
+        showAuthor={true}
+        author={author}
+      />
       <BlogCategories1 />
       <CtaArea1 />
     </Layout>

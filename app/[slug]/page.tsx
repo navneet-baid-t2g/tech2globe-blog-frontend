@@ -314,33 +314,8 @@ export default async function BlogDetailsPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <div>
-          <div
-            className="inner-hero bg-cover"
-            style={{ backgroundImage: "url(/assets/img/bg/inner-hero-bg.jpg)" }}
-          >
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="main-heading">
-                    <div className="page-prog">
-                      <Link href="/">Home</Link>
-                      <span>
-                        <i className="fa-solid fa-angle-right" />
-                      </span>
-                      <p>Blog</p>
-                      <span>
-                        <i className="fa-solid fa-angle-right" />
-                      </span>
-                      <p className="bold">{decode(post?.post_title || "")}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/*===== HERO AREA END=======*/}
           {/*===== BLOG DETAILS AREA START=======*/}
-          <div className="blog-details1-all sp">
+          <div className="blog-details1-all pb-5">
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
@@ -369,7 +344,7 @@ export default async function BlogDetailsPage({ params }: PageProps) {
                                 </Link>
                               </div>
                               <div className="date">
-                                <Link href="/#">
+                 
                                   <img
                                     src="/assets/img/icons/date1.svg"
                                     alt="Tech2Globe"
@@ -377,7 +352,7 @@ export default async function BlogDetailsPage({ params }: PageProps) {
                                   {new Date(post.post_date).toLocaleDateString(
                                     "en-GB"
                                   )}{" "}
-                                </Link>
+                           
                               </div>
                             </div>
                             {/* <Link href="/categories" className="time mt-16"><img src="/assets/img/icons/time1.svg" alt="Tech2Globe" /> 3 min read</Link> */}

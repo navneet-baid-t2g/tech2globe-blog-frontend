@@ -12,7 +12,7 @@ export default function Header1({
       <header>
         <div
           className={`header-area header-area1 d-none d-lg-block ${
-            scroll ? "sticky" : ""
+            scroll ? "sticky" : "position-relative"
           }`}
           id="header"
         >

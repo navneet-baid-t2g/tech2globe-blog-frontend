@@ -99,12 +99,12 @@ export default async function Category({ params }: PageProps) {
       <Layout headerStyle={1} footerStyle={1}>
         <div>
           <div
-            className="inner-hero bg-cover"
-            style={{ backgroundImage: "url(/assets/img/bg/inner-hero-bg.jpg)" }}
+            className="inner-hero-secondary py-3 text-center border-top border-bottom"
+            style={{ backgroundColor: "#F3F4F6" }}
           >
             <div className="container">
-              <div className="row">
-                <div className="col-lg-12">
+              <div className="row justify-content-center align-items-center">
+                <div className="col-lg-8">
                   <div className="main-heading">
                     <div className="page-prog">
                       <Link href="/">Home</Link>
@@ -115,13 +115,9 @@ export default async function Category({ params }: PageProps) {
                       <span>
                         <i className="fa-solid fa-angle-right" />
                       </span>
-                      <p>Category</p>
-                      <span>
-                        <i className="fa-solid fa-angle-right" />
-                      </span>
-                      <p className="bold">{categoryName}</p>
+                      <p className="bold">Category</p>
                     </div>
-                    <h1>{categoryName}</h1>
+                    <h1 className="display-6 fw-bold">{categoryName}</h1>
                   </div>
                 </div>
               </div>

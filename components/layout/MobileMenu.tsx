@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
+export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: any) {
   const [isAccordion, setIsAccordion] = useState(1);
 
   const handleAccordion = (key: any) => {
@@ -10,7 +10,9 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu }: any) {
   };
   return (
     <>
-      <div className="mobile-header mobile-header-main d-block d-lg-none">
+      <div className={`mobile-header mobile-header-main d-block d-lg-none ${
+            scroll ? "position-fixed" : "position-relative"
+          }`}>
         <div className="container-fluid">
           <div className="col-12">
             <div className="mobile-header-elements">

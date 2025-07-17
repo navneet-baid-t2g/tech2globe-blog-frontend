@@ -3,7 +3,7 @@ import Layout from "@/components/layout/Layout";
 import BlogCategories1 from "@/components/sections/BlogCategories1";
 import CtaArea1 from "@/components/sections/CtaArea1";
 import BlogArea1 from "@/components/sections/BlogArea1";
-import HeroArea1 from "@/components/sections/HeroArea1";
+import HeroArea5 from "@/components/sections/HeroArea5";
 
 
 export async function generateStaticParams() {
@@ -80,7 +80,7 @@ export default async function BlogPage({
 
   return (
     <Layout headerStyle={1} footerStyle={1}>
-      <HeroArea1 />
+      <HeroArea5 pageNumber={currentPage}/>
       <BlogArea1 posts={posts} totalPages={totalPages} currentPage={currentPage} recentPosts={recentPosts} />
       <BlogCategories1 />
       <CtaArea1 />

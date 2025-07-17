@@ -47,29 +47,34 @@ export default async function CategoriesPage() {
 	return (
 		<Layout headerStyle={1} footerStyle={1}>
 			<div className="category-directory">
-				<div
-					className="inner-hero bg-cover"
-					style={{ backgroundImage: 'url(/assets/img/bg/inner-hero-bg.jpg)' }}
-				>
+			 <div
+					className="inner-hero-secondary py-3 text-center border-top border-bottom"
+					style={{ backgroundColor: "#F3F4F6" }}
+				  >
 					<div className="container">
-						<div className="row">
-							<div className="col-lg-12">
-								<div className="main-heading">
-									<div className="page-prog">
-										<Link href="/">Home</Link>
-										<span><i className="fa-solid fa-angle-right" /></span>
-										<p>Blog</p>
-										<span><i className="fa-solid fa-angle-right" /></span>
-										<p className="bold">Categories</p>
-									</div>
-									<h1>Category Directory</h1>
-									<p className="subtitle mt-3">Browse all categories alphabetically</p>
-								</div>
+					  <div className="row justify-content-center align-items-center">
+						<div className="col-lg-8">
+						  <div className="main-heading">
+							<div className="page-prog">
+							  <Link href="/">Home</Link>
+							  <span>
+								<i className="fa-solid fa-angle-right" />
+							  </span>
+							  <p>Blog</p>
+							  <span>
+								<i className="fa-solid fa-angle-right" />
+							  </span>
+							  <p className="bold">Categories</p>
 							</div>
+							<h1 className="display-6 fw-bold">Category Directory</h1>
+							<p className="lead mb-0">
+							  Browse all categories alphabetically
+							</p>
+						  </div>
 						</div>
+					  </div>
 					</div>
-				</div>
-
+				  </div>
 				<Directory categories={categories} />
 			</div>
 		</Layout>
