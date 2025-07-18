@@ -3,7 +3,7 @@ import { decode } from "html-entities";
 import { fixThumbnailDomain } from "@/util/fixThumbnailDomain";
 import Image from "next/image";
 import { gifPlaceholder } from "../layout/Placeholder";
-export default function BlogCard1({ col, item, key,animated = true }: any) {
+export default function BlogCard1({ col, item, cardNumber,animated = true }: any) {
   function decodeHTML(html: string): string {
     return decode(html || "");
   }
@@ -30,6 +30,7 @@ export default function BlogCard1({ col, item, key,animated = true }: any) {
         : item.categories[0].name
       : "General";
   }
+
   function calculateReadingTime(text: string): string {
     const wordsPerMinute = 200;
     const cleanText = cleanExcerpt(text);
@@ -54,8 +55,8 @@ export default function BlogCard1({ col, item, key,animated = true }: any) {
           <Image
             src={`${thumbnailUrl}`}
             alt={item.post_title}
-            loading={`${key < 4 ? "eager" : "lazy"}`}
-            className="img-fluid"
+            loading={`${cardNumber < 4 ? "eager" : "lazy"}`}
+            className={`img-fluid ${cardNumber}`}
             width={600}
             height={400}
             placeholder="blur"
