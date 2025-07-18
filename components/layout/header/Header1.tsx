@@ -251,21 +251,6 @@ export default function Header1({
                     </ul>
                   </div>
                   <div className="header1-buttons">
-                    <div className="vl-search-top d-none">
-                      <button
-                        className="search-open-btn"
-                        onClick={handleSearch}
-                        aria-label="Open search"
-                        title="Open search"
-                      >
-                        <i
-                          className="fa-regular fa-magnifying-glass"
-                          aria-hidden="true"
-                        ></i>
-                        <span className="sr-only">Search</span>
-                      </button>
-                    </div>
-
                     <Link
                       className="theme-btn1"
                       href={`${process.env.NEXT_PUBLIC_BASE_PATH}/contact-us`}

@@ -35,7 +35,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
       >
         <div className="logo-m">
           <Link href="/">
-            <img src="/assets/img/logo/tech2globe-logo.png" alt="Tech2Globe" />
+            <Image width={160} height={46} src="/assets/img/logo/tech2globe-logo.png" alt="Tech2Globe" />
           </Link>
         </div>
         <div className="menu-close" onClick={handleMobileMenu}>

@@ -212,9 +212,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             {posts.map((post, index) => (
               <div className="col-md-4 col-sm-6 col-6" key={post.id}>
                 <div
-                  className={`feed-single position-relative ${
-                    index >= 3 ? "mt-3" : ""
-                  }`}
+                  className={`feed-single position-relative mt-0 mt-md-3`}
                 >
                   <div className="card border-0 overflow-hidden insta-card">
                     <div className="position-relative">
