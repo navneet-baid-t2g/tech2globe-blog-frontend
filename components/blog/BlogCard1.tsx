@@ -66,6 +66,7 @@ export default function BlogCard1({
             priority={cardNumber < 4}
             placeholder="blur"
             blurDataURL={gifPlaceholder}
+            className="img-fluid"
             loading={cardNumber < 4 ? "eager" : "lazy"}
             style={{ objectFit: "cover" }}
           />
