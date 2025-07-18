@@ -3,7 +3,7 @@ import { decode } from "html-entities";
 import { fixThumbnailDomain } from "@/util/fixThumbnailDomain";
 import Image from "next/image";
 import { gifPlaceholder } from "../layout/Placeholder";
-export default function BlogCard1({ col, item, animated = true }: any) {
+export default function BlogCard1({ col, item, key,animated = true }: any) {
   function decodeHTML(html: string): string {
     return decode(html || "");
   }
@@ -54,7 +54,7 @@ export default function BlogCard1({ col, item, animated = true }: any) {
           <Image
             src={`${thumbnailUrl}`}
             alt={item.post_title}
-            loading="lazy"
+            loading={`${key < 4 ? "eager" : "lazy"}`}
             className="img-fluid"
             width={600}
             height={400}

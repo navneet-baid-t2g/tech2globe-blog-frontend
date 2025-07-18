@@ -68,7 +68,7 @@ export default function BlogPost({
       ) : (
         posts.map((item, i) => (
           <React.Fragment key={item.id || i}>
-            {style === 1 && <BlogCard1 item={item} desc={desc} col={col} />}
+            {style === 1 && <BlogCard1 item={item} desc={desc} col={col} key={i} />}
             {style === 2 && <BlogCard2 item={item} desc={desc} col={col} />}
             {style === 3 && <BlogCard3 item={item} desc={desc} col={col} />}
             {style === 4 && <BlogCard4 item={item} desc={desc} col={col} />}
