@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-
+import Image from "next/image";
 export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: any) {
   const [isAccordion, setIsAccordion] = useState(1);
 
@@ -18,7 +18,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
             <div className="mobile-header-elements">
               <div className="mobile-logo">
                 <Link href="/index1">
-                  <img src="/assets/img/logo/tech2globe-logo.png" alt="Tech2Globe" />
+                  <Image width={160} height={46} src="/assets/img/logo/tech2globe-logo.png" className="img-fluid" alt="Tech2Globe" />
                 </Link>
               </div>
               <div className="mobile-nav-icon" onClick={handleMobileMenu}>
@@ -62,7 +62,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
                 <em />
               </span>
               <Link href="/#" className="main">
-                About Us <i className="fa-solid fa-angle-down" />
+                About Us
               </Link>
               <ul
                 className="sub-menu"
@@ -134,7 +134,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
                 <em />
               </span>
               <Link href="/#" className="main">
-                Services <i className="fa-solid fa-angle-down" />
+                Services 
               </Link>
               <ul
                 className="sub-menu"
@@ -202,7 +202,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
                 <em />
               </span>
               <Link href="/#" className="main">
-                Technologies <i className="fa-solid fa-angle-down" />
+                Technologies 
               </Link>
               <ul
                 className="sub-menu"
@@ -263,7 +263,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
                 <em />
               </span>
               <Link href="/#" className="main">
-                Resources <i className="fa-solid fa-angle-down" />
+                Resources 
               </Link>
               <ul
                 className="sub-menu"
@@ -308,7 +308,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
             </h3>
             <div className="contact-box d-flex">
               <div className="icon">
-                <img src="/assets/img/icons/footer1-icon1.svg" alt="vexon" />
+                <Image width={30} height={30} src="/assets/img/icons/footer1-icon1.svg" alt="Mail" />
               </div>
               <div className="text">
                 <Link href="mailto:info@tech2globe.com">info@tech2globe.com</Link>
@@ -316,7 +316,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
             </div>
             <div className="contact-box d-flex">
               <div className="icon">
-                <img src="/assets/img/icons/footer1-icon2.svg" alt="vexon" />
+                <Image width={30} height={30} src="/assets/img/icons/footer1-icon2.svg" alt="Location" />
               </div>
               <div className="text">
                   701, 7th Floor, Tower B, Logix Cyber Park,
@@ -325,7 +325,7 @@ export default function MobileMenu({ isMobileMenu, handleMobileMenu,scroll }: an
             </div>
             <div className="contact-box d-flex">
               <div className="icon">
-                <img src="/assets/img/icons/footer1-icon3.svg" alt="vexon" />
+                <Image width={30} height={30} src="/assets/img/icons/footer1-icon3.svg" alt="Call" />
               </div>
               <div className="text">
                 <Link href="tel: +91-9899675039">+91-9899675039</Link>

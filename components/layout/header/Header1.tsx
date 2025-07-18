@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 export default function Header1({
   scroll,
   isMobileMenu,
@@ -22,7 +22,12 @@ export default function Header1({
                 <div className="header-elements">
                   <div className="site-logo">
                     <Link href={`${process.env.NEXT_PUBLIC_BASE_PATH}/`}>
-                      <img
+                      <Image
+                        width={170}
+                        height={49}
+                        loading="eager"
+                        priority={true}
+                        className="img-fluid"
                         src="/assets/img/logo/tech2globe-logo.png"
                         alt="Tech2Globe"
                       />

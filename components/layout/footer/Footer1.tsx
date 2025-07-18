@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 export default function Footer1() {
   return (
     <>
@@ -9,7 +9,10 @@ export default function Footer1() {
             <div className="col-lg-3 col-md-6">
               <div className="logo">
                 <Link href={`${process.env.NEXT_PUBLIC_BASE_PATH}/`}>
-                  <img
+                  <Image
+                    width={306}
+                    height={88}
+                    className="img-fluid"
                     src="/assets/img/logo/tech2globe-logo.png"
                     alt="Tech2Globe"
                   />
@@ -211,9 +214,11 @@ export default function Footer1() {
                 <h3>Contact Us</h3>
                 <div className="footer-contact-box1">
                   <div className="icon">
-                    <img
+                    <Image
+                      width={30}
+                      height={30}
                       src="/assets/img/icons/footer1-icon1.svg"
-                      alt="vexon"
+                      alt="Mail"
                     />
                   </div>
                   <div className="text">
@@ -224,9 +229,11 @@ export default function Footer1() {
                 </div>
                 <div className="footer-contact-box1">
                   <div className="icon">
-                    <img
+                    <Image
+                      width={30}
+                      height={30}
                       src="/assets/img/icons/footer1-icon3.svg"
-                      alt="vexon"
+                      alt="Telephone"
                     />
                   </div>
                   <div className="text">

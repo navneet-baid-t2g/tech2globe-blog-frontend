@@ -1,5 +1,5 @@
 
-
+import Image from "next/image"
 export default function CtaArea1() {
 	return (
 		<>
@@ -25,7 +25,7 @@ export default function CtaArea1() {
 						</div>
 						<div className="col-lg-6">
 							<div className="image text-end sm:text-start md:text-start sm:mt-30 md:mt-30">
-								<img src="/assets/img/hero/hero1-image.png" alt="vexon" />
+								<Image width={686} height={734} src="/assets/img/hero/hero1-image.png" alt="Tech2Globe" />
 							</div>
 						</div>
 					</div>

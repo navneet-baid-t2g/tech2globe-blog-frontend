@@ -85,7 +85,7 @@ export default function BlogCard1({
               {getCategory()}
             </Link>
             <span className="time">
-              <img src="/assets/img/icons/time1.svg" alt="vexon" />{" "}
+              <img width="18" height="18" src="/assets/img/icons/time1.svg" alt="vexon" />{" "}
               {calculateReadingTime(item.post_content)}
             </span>
           </div>
@@ -122,6 +122,8 @@ export default function BlogCard1({
                 src="/assets/img/icons/date1.svg"
                 alt="published_on"
                 className="mr-2"
+                width="16"
+                height="16"
               />
               {new Date(item.post_date).toLocaleDateString("en-GB")}
             </div>
