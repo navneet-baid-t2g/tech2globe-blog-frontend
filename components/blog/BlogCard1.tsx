@@ -3,7 +3,12 @@ import { decode } from "html-entities";
 import { fixThumbnailDomain } from "@/util/fixThumbnailDomain";
 import Image from "next/image";
 import { gifPlaceholder } from "../layout/Placeholder";
-export default function BlogCard1({ col, item, cardNumber,animated = true }: any) {
+export default function BlogCard1({
+  col,
+  item,
+  cardNumber,
+  animated = true,
+}: any) {
   function decodeHTML(html: string): string {
     return decode(html || "");
   }
@@ -43,24 +48,26 @@ export default function BlogCard1({ col, item, cardNumber,animated = true }: any
   return (
     <div
       className={col}
-      {...(animated && {
-        "data-aos": "fade-up",
-        "data-aos-offset": "50",
-        "data-aos-duration": "400",
-        "data-aos-delay": "0",
-      })}
+      {...(animated &&
+        cardNumber >= 4 && {
+          "data-aos": "fade-up",
+          "data-aos-offset": "50",
+          "data-aos-duration": "100",
+          "data-aos-delay": "0",
+        })}
     >
       <div className="blog1-single-box mb-4">
         <div className="thumbnail image-anime">
           <Image
-            src={`${thumbnailUrl}`}
+            src={thumbnailUrl}
             alt={item.post_title}
-            loading={`${cardNumber < 4 ? "eager" : "lazy"}`}
-            className={`img-fluid ${cardNumber}`}
             width={600}
             height={400}
+            priority={cardNumber < 4}
             placeholder="blur"
             blurDataURL={gifPlaceholder}
+            loading={cardNumber < 4 ? "eager" : "lazy"}
+            style={{ objectFit: "cover" }}
           />
         </div>
         <div className="heading1">
